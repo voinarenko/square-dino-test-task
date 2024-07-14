@@ -1,3 +1,4 @@
+using Cinemachine;
 using Hero;
 using Infrastructure.States;
 using Logic;
@@ -44,11 +45,20 @@ namespace Factory
             obj.TryGetComponent<HeroMove>(out var move);
             move.Construct(_progressService.Progress);
             _progressService.Progress.SetHeroMove(move);
+            FollowCamera(obj.transform);
         }
 
         public void CleanUp()
         {
             _progressService.Progress.WayPoints.Left.Clear();
+        }
+
+        private static void FollowCamera(Transform hero)
+        {
+            var obj = GameObject.FindWithTag(Constants.VirtualCameraTag);
+            obj.TryGetComponent<CinemachineVirtualCamera>(out var camera);
+            camera.Follow = hero;
+            camera.LookAt = hero;
         }
     }
 }
