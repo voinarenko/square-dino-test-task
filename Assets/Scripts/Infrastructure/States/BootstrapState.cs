@@ -1,6 +1,9 @@
 ﻿using Cysharp.Threading.Tasks;
+using Factory;
 using Logic;
 using Services;
+using Services.Progress;
+using Services.StaticData;
 
 namespace Infrastructure.States
 {
@@ -27,34 +30,22 @@ namespace Infrastructure.States
 
         private void RegisterServices()
         {
-            // RegisterStaticData();
-            // _services.RegisterSingle<IProgressService>(new ProgressService());
-            // _services.RegisterSingle<IAudioService>(new AudioService());
-            // _services.RegisterSingle<IPopulationControlService>(new PopulationControlService());
-            // _services.RegisterSingle<IGameFactory>(new GameFactory(
-            //         _services.Single<IStaticDataService>(), 
-            //         _services.Single<IAudioService>(),
-            //         _services.Single<IPopulationControlService>(),
-            //         _services.Single<IProgressService>(),
-            //         _stateMachine));
-            // _services.RegisterSingle<IUiFactory>(new UiFactory(
-            //     _services.Single<IProgressService>(),
-            //     _stateMachine, 
-            //     _services.Single<IStaticDataService>()));
-            // _services.RegisterSingle<IWindowService>(new WindowService(
-            //     _services.Single<IUiFactory>()));
+            RegisterStaticData();
+            _services.RegisterSingle<IProgressService>(new ProgressService());
+            _services.RegisterSingle<IGameFactory>(new GameFactory(
+                    _services.Single<IStaticDataService>(), 
+                    _services.Single<IProgressService>(),
+                    _stateMachine));
         }
 
-        // private void RegisterStaticData()
-        // {
-        //     IStaticDataService staticData = new StaticDataService();
-        //     staticData.Load();
-        //     _services.RegisterSingle(staticData);
-        // }
-        
-        private void EnterInitProgress()
+        private void RegisterStaticData()
         {
-            //_stateMachine.Enter<InitProgressState>();
+            IStaticDataService staticData = new StaticDataService();
+            staticData.Load();
+            _services.RegisterSingle(staticData);
         }
+        
+        private void EnterInitProgress() =>
+            _stateMachine.Enter<InitProgressState>();
     }
 }

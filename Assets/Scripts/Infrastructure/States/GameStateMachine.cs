@@ -1,5 +1,7 @@
+using Factory;
 using Logic;
 using Services;
+using Services.Progress;
 using System;
 using System.Collections.Generic;
 
@@ -16,14 +18,15 @@ namespace Infrastructure.States
             {
                 [typeof(BootstrapState)] = new BootstrapState(this,
                     sceneLoader,
-                    services)//,
-                // [typeof(InitProgressState)] = new InitProgressState(this,
-                //     services.Single<IProgressService>()),
-                // [typeof(LoadLevelState)] = new LoadLevelState(this,
-                //     sceneLoader,
-                //     loadingCurtain,
-                //     services.Single<IGameFactory>()),
-                // [typeof(GameLoopState)] = new GameLoopState()
+                    services),
+                [typeof(InitProgressState)] = new InitProgressState(this,
+                    services.Single<IProgressService>()),
+                [typeof(LoadLevelState)] = new LoadLevelState(this,
+                    sceneLoader,
+                    loadingCurtain,
+                    services.Single<IGameFactory>()),
+                [typeof(GameLoopState)] = new GameLoopState(
+                    services.Single<IGameFactory>())
             };
         }
 
