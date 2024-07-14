@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Services.StaticData
+namespace StaticData
 {
     [CreateAssetMenu(fileName = "PlatformData", menuName = "Static/Platforms")]
     public class PlatformStaticData : ScriptableObject
     {
-        public int Id { get; set; }
-        public List<GameObject> SpawnPoints { get; set; }
+        public int Id;
+        public List<GameObject> SpawnPoints;
     }
 }

@@ -20,6 +20,7 @@ namespace Infrastructure.States
         public void Enter()
         {
             _progressService.Progress = new PlayerProgress();
+            _progressService.Subscribe();
             _stateMachine.Enter<LoadLevelState, string>(Constants.Main);
         }
 

@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b54f24d3e6a34dfeb505e2ace08a0760, type: 3}
   m_Name: Platform1Data
   m_EditorClassIdentifier: 
+  Id: 1
+  SpawnPoints:
+  - {fileID: 7437963905742999410, guid: abbd735e96e72d6408d055fd4f59519f, type: 3}

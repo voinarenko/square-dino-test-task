@@ -1,5 +1,5 @@
-﻿using Data;
-using Logic;
+﻿using Logic;
+using Services.Progress;
 using System;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,27 +12,27 @@ namespace Hero
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private HeroAnimate _animate;
 
-        private PlayerProgress _progress;
+        private IProgressService _progressService;
 
-        public void Construct(PlayerProgress progress)
+        public void Construct(IProgressService progressService)
         {
-            _progress = progress;
-            _progress.GameStarted += Run;
-            _progress.PlatformCleared += Continue;
+            _progressService = progressService;
+            _progressService.GameStarted += Run;
+            _progressService.PlatformCleared += Continue;
         }
 
         private void Run()
         {
-            _progress.GameStarted -= Run;
-            _progress.WayPoints.Left.Remove(_progress.WayPoints.Left[0]);
+            _progressService.GameStarted -= Run;
+            _progressService.Progress.WayPoints.Left.Remove(_progressService.Progress.WayPoints.Left[0]);
             Continue();
         }
 
         private void Continue()
         {
-            _progress.WayPoints.Left[0].TryGetComponent<WayPointTrigger>(out var trigger);
+            _progressService.Progress.WayPoints.Left[0].TryGetComponent<WayPointTrigger>(out var trigger);
             trigger.Reached += OnReached;
-            MoveToDestination(_progress.WayPoints.Left[0].position);
+            MoveToDestination(_progressService.Progress.WayPoints.Left[0].position);
             _animate.PlayRun();
         }
         
@@ -42,7 +42,7 @@ namespace Hero
         private void OnReached(WayPointTrigger trigger)
         {
             trigger.Reached -= OnReached;
-            _progress.WayPoints.Left.Remove(trigger.transform);
+            _progressService.Progress.WayPoints.Left.Remove(trigger.transform);
             _animate.PlayIdle();
             Arrived?.Invoke();
         }

@@ -1,47 +1,27 @@
-﻿using Hero;
-using Logic;
-using System;
+﻿using System;
 
 namespace Data
 {
     public class PlayerProgress
     {
-        public event Action GameStarted;
-        public event Action PlatformCleared;
-
+        public event Action<int> EnemiesChanged; 
+        
         public WayPoints WayPoints { get; set; } = new();
-        private int _currentPlatform;
+        public int CurrentPlatform { get; set; }
 
-        private PointerInputListener _pointerListener;
-        private HeroMove _heroMove;
-        private bool _firstRun = true;
-
-        public void SetInputListener(PointerInputListener pointerListener)
+        public int EnemiesLeft
         {
-            _pointerListener = pointerListener;
-            _pointerListener.Clicked += OnClicked;
-        }
-
-        public void SetHeroMove(HeroMove move)
-        {
-            _heroMove = move;
-            _heroMove.Arrived += OnArrived;
-        }
-
-        private void OnClicked()
-        {
-            if (_firstRun)
+            get => _enemiesLeft;
+            set
             {
-                _firstRun = false;
-                GameStarted?.Invoke();
-                _pointerListener.gameObject.SetActive(false);
+                if (_enemiesLeft != value)
+                {
+                    _enemiesLeft = value;
+                    EnemiesChanged?.Invoke(_enemiesLeft);
+                }
             }
         }
 
-        private void OnArrived()
-        {
-            //_currentPlatform++;
-            if (WayPoints.Left.Count > 0) PlatformCleared?.Invoke();
-        }
+        private int _enemiesLeft;
     }
 }

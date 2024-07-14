@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 3194973618413497673}
   - component: {fileID: 4736462229070536790}
   - component: {fileID: 8044228633055274809}
+  - component: {fileID: -1066698502774888938}
   m_Layer: 5
   m_Name: PointerInputListener
   m_TagString: Untagged
@@ -290,3 +291,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _message: {fileID: 2794475652420649126}
+--- !u!114 &-1066698502774888938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7783005513570164914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87a306ee0ec400fb14ee2c850ede04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

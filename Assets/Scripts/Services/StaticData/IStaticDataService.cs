@@ -1,4 +1,6 @@
-﻿namespace Services.StaticData
+﻿using StaticData;
+
+namespace Services.StaticData
 {
     public interface IStaticDataService : IService
     {
@@ -6,5 +8,7 @@
         HeroStaticData ForHero();
         WayPointsStaticData ForWayPoints();
         GameStaticData ForGame();
+        PlatformStaticData ForPlatform(int id);
+        EnemyStaticData ForEnemy();
     }
 }
