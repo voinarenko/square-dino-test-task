@@ -17,5 +17,8 @@ namespace Logic
         public void OnPointerDown(PointerEventData eventData) { }
 
         public void OnPointerUp(PointerEventData eventData) { }
+
+        public void HideMessage() =>
+            _message.gameObject.SetActive(false);
     }
 }

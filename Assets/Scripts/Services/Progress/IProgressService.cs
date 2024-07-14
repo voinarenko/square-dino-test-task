@@ -14,7 +14,7 @@ namespace Services.Progress
         PlayerProgress Progress { get; set; }
         bool FirstRun { get; set; }
         void SetInputListener(PointerInputListener pointerListener);
-        void SetHeroMove(HeroMove move);
+        void SetHero(HeroMove move, HeroShoot shoot);
         void Subscribe();
     }
 }

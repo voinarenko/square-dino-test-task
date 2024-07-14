@@ -19,6 +19,7 @@ namespace Services.Progress
 
         private PointerInputListener _pointerListener;
         private HeroMove _heroMove;
+        private HeroShoot _heroShoot;
 
         public ProgressService(GameStateMachine stateMachine) =>
             _stateMachine = stateMachine;
@@ -32,10 +33,11 @@ namespace Services.Progress
             _pointerListener.Clicked += OnClicked;
         }
 
-        public void SetHeroMove(HeroMove move)
+        public void SetHero(HeroMove move, HeroShoot shoot)
         {
             _heroMove = move;
             _heroMove.Arrived += OnArrived;
+            _heroShoot = shoot;
         }
 
         private void OnClicked()
@@ -45,6 +47,11 @@ namespace Services.Progress
                 FirstRun = false;
                 GameStarted?.Invoke();
                 _pointerListener.gameObject.SetActive(false);
+                _pointerListener.HideMessage();
+            }
+            else
+            {
+                _heroShoot.Fire();
             }
         }
 
@@ -54,7 +61,9 @@ namespace Services.Progress
             if (Progress.WayPoints.Left.Count > 0)
             {
                 PlatformChanged?.Invoke(Progress.CurrentPlatform, _heroMove.transform);
-                PlatformCleared?.Invoke();
+                _pointerListener.gameObject.SetActive(true);
+                _heroShoot.Enabled = true;
+                //PlatformCleared?.Invoke();
             }
             else
                 _stateMachine.Enter<InitProgressState>();
@@ -63,7 +72,10 @@ namespace Services.Progress
         private void OnEnemiesChanged(int enemies)
         {
             if (enemies <= 0)
+            {
+                _heroShoot.Enabled = false;
                 PlatformCleared?.Invoke();
+            }
         }
     }
 }

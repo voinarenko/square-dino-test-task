@@ -1,3 +1,4 @@
+using Bullet;
 using Cinemachine;
 using Hero;
 using Infrastructure.States;
@@ -15,6 +16,7 @@ namespace Factory
         private readonly IStaticDataService _staticDataService;
         private readonly IProgressService _progressService;
         private readonly GameStateMachine _stateMachine;
+        private readonly Queue<BulletDestroy> _bullets = new();
 
         public GameFactory(IStaticDataService staticDataService, IProgressService progressService,
             GameStateMachine stateMachine)
@@ -47,10 +49,37 @@ namespace Factory
             var obj = Object.Instantiate(data.Prefab, points.Left[0].transform.position, Quaternion.identity);
             obj.TryGetComponent<HeroMove>(out var move);
             move.Construct(_progressService);
-            _progressService.SetHeroMove(move);
+            obj.TryGetComponent<HeroShoot>(out var shoot);
+            shoot.Construct(this);
+            _progressService.SetHero(move, shoot);
             FollowCamera(obj.transform);
         }
 
+        public BulletDestroy GetBullet(Transform from, Vector3 to)
+        {
+            if (_bullets.Count > 0)
+            {
+                var bullet = _bullets.Dequeue();
+                var data = _staticDataService.ForBullet();
+                bullet.transform.position = from.position;
+                bullet.transform.rotation = from.rotation;
+                bullet.TryGetComponent<BulletMove>(out var move);
+                move.Speed = data.Speed;
+                move.Target = to;
+                bullet.gameObject.SetActive(true);
+                return bullet;
+            }
+            else
+            {
+                var obj = CreateBullet(from, to);
+                obj.TryGetComponent<BulletDestroy>(out var bullet);
+                return bullet;
+            }
+        }
+        
+        public void PutBullet(BulletDestroy bullet) =>
+            _bullets.Enqueue(bullet);
+        
         public void CleanUp()
         {
             var spawnedObjects = Object.FindObjectsByType<SpawnedItem>(FindObjectsInactive.Include, FindObjectsSortMode.None);
@@ -60,6 +89,18 @@ namespace Factory
             _progressService.FirstRun = true;
         }
 
+        private GameObject CreateBullet(Transform from, Vector3 to)
+        {
+            var data = _staticDataService.ForBullet();
+            var obj = Object.Instantiate(data.Prefab, from.position, Quaternion.identity);
+            obj.TryGetComponent<BulletMove>(out var move);
+            move.Speed = data.Speed;
+            move.Target = to;
+            obj.TryGetComponent<BulletDamage>(out var damage);
+            damage.Damage = data.Damage;
+            return obj;
+        }
+        
         private void CreateEnemies(int platformId, Transform hero)
         {
             var data = _staticDataService.ForEnemy();

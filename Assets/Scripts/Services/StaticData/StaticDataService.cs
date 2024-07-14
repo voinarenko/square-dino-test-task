@@ -12,12 +12,14 @@ namespace Services.StaticData
         private const string StaticDataGamePath = "StaticData/Game/GameData";
         private const string StaticDataPlatformsPath = "StaticData/Platforms";
         private const string StaticDataEnemyPath = "StaticData/Enemy/EnemyData";
+        private const string StaticDataBulletPath = "StaticData/Bullet/BulletData";
 
         private HeroStaticData _hero;
         private WayPointsStaticData _wayPoints;
         private GameStaticData _game;
         private Dictionary<int, PlatformStaticData> _platforms;
         private EnemyStaticData _enemy;
+        private BulletStaticData _bullet;
 
         public void Load()
         {
@@ -28,6 +30,7 @@ namespace Services.StaticData
                 .LoadAll<PlatformStaticData>(StaticDataPlatformsPath)
                 .ToDictionary(x => x.Id, x => x);
             _enemy = Resources.Load<EnemyStaticData>(StaticDataEnemyPath);
+            _bullet = Resources.Load<BulletStaticData>(StaticDataBulletPath);
         }
 
         public HeroStaticData ForHero() => 
@@ -44,5 +47,8 @@ namespace Services.StaticData
 
         public EnemyStaticData ForEnemy() =>
             _enemy;
+        
+        public BulletStaticData ForBullet() => 
+            _bullet;
     }
 }

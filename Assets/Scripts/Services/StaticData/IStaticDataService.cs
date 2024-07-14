@@ -10,5 +10,6 @@ namespace Services.StaticData
         GameStaticData ForGame();
         PlatformStaticData ForPlatform(int id);
         EnemyStaticData ForEnemy();
+        BulletStaticData ForBullet();
     }
 }

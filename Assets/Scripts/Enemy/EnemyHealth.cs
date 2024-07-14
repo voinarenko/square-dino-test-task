@@ -25,5 +25,8 @@ namespace Enemy
         }
 
         private int _currentHealth;
+        
+        public void TakeDamage(int amount) => 
+            CurrentHealth -= amount;
     }
 }

@@ -1,4 +1,6 @@
+using Bullet;
 using Services;
+using UnityEngine;
 
 namespace Factory
 {
@@ -8,5 +10,7 @@ namespace Factory
         void CreateWaypoints();
         void CleanUp();
         void CreateInputListener();
+        BulletDestroy GetBullet(Transform from, Vector3 to);
+        void PutBullet(BulletDestroy bullet);
     }
 }
