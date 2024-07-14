@@ -37,6 +37,7 @@ namespace Infrastructure.States
         private void OnLoaded()
         {
             _loadingCurtain.Hide().Forget();
+            _gameFactory.CreateInputListener();
             _gameFactory.CreateWaypoints();
             _gameFactory.CreateHero();
             _stateMachine.Enter<GameLoopState>();

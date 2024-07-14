@@ -5,6 +5,6 @@ namespace Data
 {
     public class WayPoints
     {
-        public List<Transform> WayPointsLeft { get; set; } = new();
+        public List<Transform> Left { get; set; } = new();
     }
 }

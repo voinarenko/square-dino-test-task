@@ -7,5 +7,6 @@ namespace Factory
         void CreateHero();
         void CreateWaypoints();
         void CleanUp();
+        void CreateInputListener();
     }
 }
