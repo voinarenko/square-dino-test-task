@@ -5,5 +5,6 @@ namespace Factory
     public interface IGameFactory : IService
     {
         void CreateHero();
+        void CreateWaypoints();
     }
 }

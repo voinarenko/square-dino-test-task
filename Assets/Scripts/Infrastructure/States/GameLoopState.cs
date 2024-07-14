@@ -15,7 +15,7 @@ namespace Infrastructure.States
 
         public void Exit()
         {
-            // _factory.CleanUpSpawners();
+            // _factory.CleanUp();
         }
     }
 }

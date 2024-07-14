@@ -4,5 +4,6 @@
     {
         void Load();
         HeroStaticData ForHero();
+        WayPointsStaticData ForWayPoints();
     }
 }

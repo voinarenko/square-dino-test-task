@@ -18,10 +18,18 @@ namespace Factory
             _stateMachine = stateMachine;
         }
 
+        public void CreateWaypoints()
+        {
+            var data = _staticDataService.ForWayPoints();
+            foreach (var wayPoint in data.WayPoints) 
+                _progressService.Progress.WayPoints.WayPointsLeft.Add(Object.Instantiate(wayPoint).transform);
+        }
+        
         public void CreateHero()
         {
-            var hero = _staticDataService.ForHero();
-            var obj = Object.Instantiate(hero.Prefab);
+            var data = _staticDataService.ForHero();
+            var points = _progressService.Progress.WayPoints.WayPointsLeft;
+            var obj = Object.Instantiate(data.Prefab, points[0].transform.position, Quaternion.identity);
         }
     }
 }
