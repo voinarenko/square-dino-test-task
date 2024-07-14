@@ -1,5 +1,6 @@
 ﻿using Data;
 using Logic;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +8,7 @@ namespace Hero
 {
     public class HeroMove : MonoBehaviour
     {
+        public event Action Arrived;
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private HeroAnimate _animate;
 
@@ -42,6 +44,7 @@ namespace Hero
             trigger.Reached -= OnReached;
             _progress.WayPoints.Left.Remove(trigger.transform);
             _animate.PlayIdle();
+            Arrived?.Invoke();
         }
     }
 }

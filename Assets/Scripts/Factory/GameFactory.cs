@@ -43,6 +43,7 @@ namespace Factory
             var obj = Object.Instantiate(data.Prefab, points.Left[0].transform.position, Quaternion.identity);
             obj.TryGetComponent<HeroMove>(out var move);
             move.Construct(_progressService.Progress);
+            _progressService.Progress.SetHeroMove(move);
         }
 
         public void CleanUp()
