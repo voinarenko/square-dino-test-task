@@ -36,7 +36,6 @@ namespace Data
                 GameStarted?.Invoke();
                 _pointerListener.gameObject.SetActive(false);
             }
-            
         }
 
         private void OnArrived()
