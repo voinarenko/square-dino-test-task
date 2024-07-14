@@ -24,12 +24,17 @@ namespace Factory
             foreach (var wayPoint in data.WayPoints) 
                 _progressService.Progress.WayPoints.WayPointsLeft.Add(Object.Instantiate(wayPoint).transform);
         }
-        
+
         public void CreateHero()
         {
             var data = _staticDataService.ForHero();
             var points = _progressService.Progress.WayPoints.WayPointsLeft;
             var obj = Object.Instantiate(data.Prefab, points[0].transform.position, Quaternion.identity);
+        }
+
+        public void CleanUp()
+        {
+            _progressService.Progress.WayPoints.WayPointsLeft.Clear();
         }
     }
 }

@@ -6,5 +6,6 @@ namespace Factory
     {
         void CreateHero();
         void CreateWaypoints();
+        void CleanUp();
     }
 }
