@@ -34,8 +34,7 @@ namespace Infrastructure.States
             _services.RegisterSingle<IProgressService>(new ProgressService(_stateMachine));
             _services.RegisterSingle<IGameFactory>(new GameFactory(
                     _services.Single<IStaticDataService>(), 
-                    _services.Single<IProgressService>(),
-                    _stateMachine));
+                    _services.Single<IProgressService>()));
         }
 
         private void RegisterStaticData()

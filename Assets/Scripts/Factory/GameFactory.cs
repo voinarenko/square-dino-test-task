@@ -2,7 +2,6 @@ using Bullet;
 using Cinemachine;
 using Enemy;
 using Hero;
-using Infrastructure.States;
 using Logic;
 using Services.Progress;
 using Services.StaticData;
@@ -17,15 +16,12 @@ namespace Factory
     {
         private readonly IStaticDataService _staticDataService;
         private readonly IProgressService _progressService;
-        private readonly GameStateMachine _stateMachine;
         private readonly Queue<BulletDestroy> _bullets = new();
 
-        public GameFactory(IStaticDataService staticDataService, IProgressService progressService,
-            GameStateMachine stateMachine)
+        public GameFactory(IStaticDataService staticDataService, IProgressService progressService)
         {
             _staticDataService = staticDataService;
             _progressService = progressService;
-            _stateMachine = stateMachine;
             _progressService.PlatformChanged += CreateEnemies;
         }
 
