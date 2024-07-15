@@ -31,12 +31,17 @@ namespace Hero
             if (Physics.Raycast(ray, out var hit, 1000))
             {
                 var bullet = _factory.GetBullet(_shootPoint, hit.point);
+                bullet.Destroyed += OnBulletDestroy;
                 bullet.TryGetComponent<BulletMove>(out var move);
                 move.Run();
-                Debug.Log(hit.transform.name);
-                Debug.Log(hit.transform.position);
-                Debug.Log("hit");
             }
+        }
+
+        private void OnBulletDestroy(BulletDestroy bullet)
+        {
+            bullet.Destroyed -= OnBulletDestroy;
+            _factory.PutBullet(bullet);
+            bullet.gameObject.SetActive(false);
         }
     }
 }

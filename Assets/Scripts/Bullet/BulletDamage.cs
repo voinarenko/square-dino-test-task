@@ -17,8 +17,8 @@ namespace Bullet
             {
                 if (other.TryGetComponent<EnemyHealth>(out var health))
                     health.TakeDamage(Damage);
-                Hit?.Invoke(true);
             }
+            Hit?.Invoke(true);
         }
 
     }

@@ -27,9 +27,6 @@ namespace Bullet
             _dir = (Target - transform.position).normalized;
         }
 
-        public void Stop() =>
-            _moving = false;
-
         private void Move() =>
             _rigidbody.MovePosition(transform.position + _dir * (Speed * Time.fixedDeltaTime));
 
