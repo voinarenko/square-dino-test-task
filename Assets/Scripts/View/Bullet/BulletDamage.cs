@@ -1,9 +1,9 @@
-﻿using Enemy;
-using Logic;
+﻿using Logic;
 using System;
 using UnityEngine;
+using View.Enemy;
 
-namespace Bullet
+namespace View.Bullet
 {
     public class BulletDamage : MonoBehaviour
     {

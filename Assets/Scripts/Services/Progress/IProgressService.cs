@@ -1,8 +1,8 @@
 ﻿using Data;
-using Hero;
 using Logic;
 using System;
 using UnityEngine;
+using View.Hero;
 
 namespace Services.Progress
 {

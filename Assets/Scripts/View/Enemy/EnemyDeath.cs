@@ -1,7 +1,7 @@
 ﻿using Data;
 using UnityEngine;
 
-namespace Enemy
+namespace View.Enemy
 {
     public class EnemyDeath : MonoBehaviour
     {

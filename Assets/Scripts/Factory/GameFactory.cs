@@ -1,7 +1,4 @@
-using Bullet;
 using Cinemachine;
-using Enemy;
-using Hero;
 using Logic;
 using Services.Progress;
 using Services.StaticData;
@@ -9,6 +6,10 @@ using StaticData;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
+using View.Bullet;
+using View.Enemy;
+using View.Hero;
 
 namespace Factory
 {
@@ -50,6 +51,9 @@ namespace Factory
             obj.TryGetComponent<HeroShoot>(out var shoot);
             shoot.Construct(this);
             _progressService.SetHero(move, shoot);
+            obj.TryGetComponent<NavMeshAgent>(out var agent);
+            agent.speed = data.MoveSpeed;
+            agent.angularSpeed = data.RotateSpeed;
             FollowCamera(obj.transform);
         }
 

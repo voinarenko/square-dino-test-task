@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Bullet
+namespace View.Bullet
 {
     public class BulletDestroy : MonoBehaviour
     {

@@ -1,8 +1,8 @@
-﻿using Bullet;
-using Factory;
+﻿using Factory;
 using UnityEngine;
+using View.Bullet;
 
-namespace Hero
+namespace View.Hero
 {
     public class HeroShoot : MonoBehaviour
     {

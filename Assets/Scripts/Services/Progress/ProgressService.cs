@@ -1,9 +1,9 @@
 ﻿using Data;
-using Hero;
 using Infrastructure.States;
 using Logic;
 using System;
 using UnityEngine;
+using View.Hero;
 
 namespace Services.Progress
 {
@@ -75,12 +75,10 @@ namespace Services.Progress
 
         private void OnEnemiesChanged(int enemies)
         {
-            Debug.Log($"Enemies: {enemies}");
-            if (enemies <= 0)
-            {
-                _heroShoot.Enabled = false;
-                PlatformCleared?.Invoke();
-            }
+            if (enemies > 0) 
+                return;
+            _heroShoot.Enabled = false;
+            PlatformCleared?.Invoke();
         }
     }
 }

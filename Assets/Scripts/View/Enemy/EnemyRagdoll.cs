@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Enemy
+namespace View.Enemy
 {
     public class EnemyRagdoll : MonoBehaviour
     {

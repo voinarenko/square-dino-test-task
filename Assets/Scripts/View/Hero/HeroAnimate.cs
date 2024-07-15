@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Hero
+namespace View.Hero
 {
     public class HeroAnimate : MonoBehaviour
     {

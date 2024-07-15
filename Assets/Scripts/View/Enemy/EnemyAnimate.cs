@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Enemy
+namespace View.Enemy
 {
     public class EnemyAnimate : MonoBehaviour
     {

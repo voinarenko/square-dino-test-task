@@ -1,6 +1,6 @@
-using Bullet;
 using Services;
 using UnityEngine;
+using View.Bullet;
 
 namespace Factory
 {

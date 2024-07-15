@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 
 namespace Data
 {
@@ -9,30 +8,20 @@ namespace Data
         
         public WayPoints WayPoints { get; set; } = new();
 
-        public int CurrentPlatform
-        {
-            get => _currentPlatform;
-            set
-            {
-                _currentPlatform = value;
-                Debug.Log($"Current platform: {_currentPlatform}");
-            }
-        }
+        public int CurrentPlatform { get; set; }
 
         public int EnemiesLeft
         {
             get => _enemiesLeft;
             set
             {
-                if (_enemiesLeft != value)
-                {
-                    _enemiesLeft = value;
-                    EnemiesChanged?.Invoke(_enemiesLeft);
-                }
+                if (_enemiesLeft == value) 
+                    return;
+                _enemiesLeft = value;
+                EnemiesChanged?.Invoke(_enemiesLeft);
             }
         }
 
         private int _enemiesLeft;
-        private int _currentPlatform;
     }
 }

@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Hero
+namespace View.Hero
 {
     public class HeroMove : MonoBehaviour
     {

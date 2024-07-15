@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Bullet
+namespace View.Bullet
 {
     public class BulletMove : MonoBehaviour
     {

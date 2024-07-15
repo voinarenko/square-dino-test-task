@@ -7,7 +7,6 @@ namespace StaticData
     {
         public float MoveSpeed;
         public float RotateSpeed;
-        public float ShootDelay;
         public GameObject Prefab;
     }
 }

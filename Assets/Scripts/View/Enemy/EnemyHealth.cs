@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Enemy
+namespace View.Enemy
 {
     public class EnemyHealth : MonoBehaviour
     {
