@@ -27,6 +27,13 @@ namespace Services.Progress
         public void Subscribe() =>
             Progress.EnemiesChanged += OnEnemiesChanged;
 
+        public void Unsubscribe()
+        {
+            Progress.EnemiesChanged -= OnEnemiesChanged;
+            _pointerListener.Clicked -= OnClicked;
+            _heroMove.Arrived -= OnArrived;
+        }
+        
         public void SetInputListener(PointerInputListener pointerListener)
         {
             _pointerListener = pointerListener;
@@ -68,6 +75,7 @@ namespace Services.Progress
 
         private void OnEnemiesChanged(int enemies)
         {
+            Debug.Log($"Enemies: {enemies}");
             if (enemies <= 0)
             {
                 _heroShoot.Enabled = false;

@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Data
 {
@@ -7,7 +8,16 @@ namespace Data
         public event Action<int> EnemiesChanged; 
         
         public WayPoints WayPoints { get; set; } = new();
-        public int CurrentPlatform { get; set; }
+
+        public int CurrentPlatform
+        {
+            get => _currentPlatform;
+            set
+            {
+                _currentPlatform = value;
+                Debug.Log($"Current platform: {_currentPlatform}");
+            }
+        }
 
         public int EnemiesLeft
         {
@@ -23,5 +33,6 @@ namespace Data
         }
 
         private int _enemiesLeft;
+        private int _currentPlatform;
     }
 }

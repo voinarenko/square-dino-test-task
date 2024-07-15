@@ -9,10 +9,16 @@ namespace Hero
         
         [SerializeField] private Animator _animator;
         
-        public void PlayIdle() => 
-            _animator.SetTrigger(Idle);
-        
-        public void PlayRun() => 
-            _animator.SetTrigger(Run);
+        public void PlayIdle()
+        {
+            if (_animator)
+                _animator.SetTrigger(Idle);
+        }
+
+        public void PlayRun()
+        {
+            if (_animator) 
+                _animator.SetTrigger(Run);
+        }
     }
 }

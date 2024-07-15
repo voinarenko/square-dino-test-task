@@ -85,6 +85,7 @@ namespace Factory
                 Object.Destroy(spawnedObject.gameObject);
             _progressService.Progress.WayPoints.Left.Clear();
             _progressService.FirstRun = true;
+            _progressService.Unsubscribe();
         }
 
         private GameObject CreateBullet(Transform from, Vector3 to)

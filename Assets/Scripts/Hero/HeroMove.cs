@@ -36,8 +36,11 @@ namespace Hero
             _animate.PlayRun();
         }
         
-        private void MoveToDestination(Vector3 destination) =>
-            _agent.SetDestination(destination);
+        private void MoveToDestination(Vector3 destination)
+        {
+            if (_agent) 
+                _agent.SetDestination(destination);
+        }
 
         private void OnReached(WayPointTrigger trigger)
         {

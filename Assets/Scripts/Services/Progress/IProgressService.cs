@@ -16,5 +16,6 @@ namespace Services.Progress
         void SetInputListener(PointerInputListener pointerListener);
         void SetHero(HeroMove move, HeroShoot shoot);
         void Subscribe();
+        void Unsubscribe();
     }
 }
