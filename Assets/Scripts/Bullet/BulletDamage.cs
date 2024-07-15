@@ -11,8 +11,17 @@ namespace Bullet
 
         public int Damage { get; set; }
 
+        private bool _collided;
+
+        private void OnEnable() =>
+            _collided = false;
+
         private void OnTriggerEnter(Collider other)
         {
+            if (_collided)
+                return;
+
+            _collided = true;
             if (other.CompareTag(Constants.EnemyTag))
             {
                 if (other.TryGetComponent<EnemyHealth>(out var health))

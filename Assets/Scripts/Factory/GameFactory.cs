@@ -1,10 +1,12 @@
 using Bullet;
 using Cinemachine;
+using Enemy;
 using Hero;
 using Infrastructure.States;
 using Logic;
 using Services.Progress;
 using Services.StaticData;
+using StaticData;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -105,11 +107,17 @@ namespace Factory
         {
             var data = _staticDataService.ForEnemy();
             var points = CreateSpawnPoints(platformId);
-            foreach (var point in points)
-            {
-                var obj = Object.Instantiate(data.Prefab, point.transform.position, Quaternion.identity);
-                obj.transform.LookAt(hero.position);
-            }
+            foreach (var point in points) 
+                CreateEnemy(hero, data, point);
+        }
+
+        private static void CreateEnemy(Transform hero, EnemyStaticData data, GameObject point)
+        {
+            var obj = Object.Instantiate(data.Prefab, point.transform.position, Quaternion.identity);
+            obj.TryGetComponent<EnemyHealth>(out var health);
+            health.MaxHealth = data.Health;
+            health.ResetHealth();
+            obj.transform.LookAt(hero.position);
         }
 
         private List<GameObject> CreateSpawnPoints(int platformId)

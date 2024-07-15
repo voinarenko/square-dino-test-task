@@ -26,7 +26,10 @@ namespace Enemy
 
         private int _currentHealth;
         
-        public void TakeDamage(int amount) => 
+        public void ResetHealth() => 
+            CurrentHealth = MaxHealth;
+        
+        public void TakeDamage(int amount) =>
             CurrentHealth -= amount;
     }
 }
