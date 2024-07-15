@@ -11,7 +11,8 @@ namespace View.Hero
         public event Action Arrived;
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private HeroAnimate _animate;
-
+        [SerializeField] private HeroShoot _shoot;
+            
         private IProgressService _progressService;
 
         public void Construct(IProgressService progressService)
@@ -38,6 +39,7 @@ namespace View.Hero
         
         private void MoveToDestination(Vector3 destination)
         {
+            _shoot.Enabled = false;
             if (_agent) 
                 _agent.SetDestination(destination);
         }
@@ -48,6 +50,7 @@ namespace View.Hero
             _progressService.Progress.WayPoints.Left.Remove(trigger.transform);
             _animate.PlayIdle();
             Arrived?.Invoke();
+            _shoot.Enabled = true;
         }
     }
 }

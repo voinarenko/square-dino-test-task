@@ -111,6 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent: {fileID: 6078602501585729408}
   _animate: {fileID: -1662601247470983822}
+  _shoot: {fileID: 4638272416186201272}
 --- !u!114 &4638272416186201272
 MonoBehaviour:
   m_ObjectHideFlags: 0

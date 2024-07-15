@@ -1,5 +1,6 @@
 ﻿using Factory;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using View.Bullet;
 
 namespace View.Hero
@@ -12,22 +13,36 @@ namespace View.Hero
         
         private IGameFactory _factory;
         private Camera _camera;
-        
+        private PlayerInputActions _inputActions;
+
         public void Construct(IGameFactory factory) => 
             _factory = factory;
         
+        private void OnEnable()
+        {
+            _inputActions.Gameplay.Enable();
+            _inputActions.Gameplay.Shoot.performed += OnShoot;
+        }
+        
         private void Awake()
         {
-            Enabled = true;
+            _inputActions = new PlayerInputActions();
             _camera = Camera.main;
         }
 
-        public void Fire()
+        private void OnDisable()
+        {
+            _inputActions.Gameplay.Shoot.performed -= OnShoot;
+            _inputActions.Gameplay.Disable();
+        }
+
+        private void Fire()
         {
             if (!Enabled) 
                 return;
             
-            var ray = _camera.ScreenPointToRay(Input.mousePosition);
+            var touchPosition = Touchscreen.current.primaryTouch.position.ReadValue();
+            var ray = _camera.ScreenPointToRay(touchPosition);
             if (Physics.Raycast(ray, out var hit, 1000))
             {
                 var bullet = _factory.GetBullet(_shootPoint, hit.point);
@@ -36,6 +51,9 @@ namespace View.Hero
                 move.Run();
             }
         }
+
+        private void OnShoot(InputAction.CallbackContext context) =>
+            Fire();
 
         private void OnBulletDestroy(BulletDestroy bullet)
         {

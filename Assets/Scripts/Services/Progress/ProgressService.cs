@@ -49,26 +49,20 @@ namespace Services.Progress
 
         private void OnClicked()
         {
-            if (FirstRun)
-            {
-                FirstRun = false;
-                GameStarted?.Invoke();
-                _pointerListener.gameObject.SetActive(false);
-                _pointerListener.HideMessage();
-            }
-            else
-                _heroShoot.Fire();
+            if (!FirstRun) 
+                return;
+            
+            FirstRun = false;
+            GameStarted?.Invoke();
+            _pointerListener.gameObject.SetActive(false);
+            _pointerListener.HideMessage();
         }
 
         private void OnArrived()
         {
             Progress.CurrentPlatform++;
             if (Progress.WayPoints.Left.Count > 0)
-            {
                 PlatformChanged?.Invoke(Progress.CurrentPlatform, _heroMove.transform);
-                _pointerListener.gameObject.SetActive(true);
-                _heroShoot.Enabled = true;
-            }
             else
                 _stateMachine.Enter<InitProgressState>();
         }
@@ -77,7 +71,6 @@ namespace Services.Progress
         {
             if (enemies > 0) 
                 return;
-            _heroShoot.Enabled = false;
             PlatformCleared?.Invoke();
         }
     }
