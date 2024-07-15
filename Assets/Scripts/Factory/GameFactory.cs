@@ -109,14 +109,17 @@ namespace Factory
             var points = CreateSpawnPoints(platformId);
             foreach (var point in points) 
                 CreateEnemy(hero, data, point);
+            _progressService.Progress.EnemiesLeft = points.Count;
         }
 
-        private static void CreateEnemy(Transform hero, EnemyStaticData data, GameObject point)
+        private void CreateEnemy(Transform hero, EnemyStaticData data, GameObject point)
         {
             var obj = Object.Instantiate(data.Prefab, point.transform.position, Quaternion.identity);
             obj.TryGetComponent<EnemyHealth>(out var health);
             health.MaxHealth = data.Health;
             health.ResetHealth();
+            obj.TryGetComponent<EnemyDeath>(out var death);
+            death.Construct(_progressService.Progress);
             obj.transform.LookAt(hero.position);
         }
 

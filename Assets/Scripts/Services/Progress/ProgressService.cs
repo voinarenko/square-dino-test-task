@@ -50,9 +50,7 @@ namespace Services.Progress
                 _pointerListener.HideMessage();
             }
             else
-            {
                 _heroShoot.Fire();
-            }
         }
 
         private void OnArrived()
@@ -63,7 +61,6 @@ namespace Services.Progress
                 PlatformChanged?.Invoke(Progress.CurrentPlatform, _heroMove.transform);
                 _pointerListener.gameObject.SetActive(true);
                 _heroShoot.Enabled = true;
-                //PlatformCleared?.Invoke();
             }
             else
                 _stateMachine.Enter<InitProgressState>();
