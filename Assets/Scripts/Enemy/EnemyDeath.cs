@@ -6,6 +6,7 @@ namespace Enemy
     public class EnemyDeath : MonoBehaviour
     {
         [SerializeField] private EnemyHealth _health;
+        [SerializeField] private EnemyRagdoll _ragdoll;
         private PlayerProgress _progress;
 
         public void Construct(PlayerProgress progress) => 
@@ -18,7 +19,7 @@ namespace Enemy
         {
             _health.Dead -= OnDeath;
             _progress.EnemiesLeft--;
-            Destroy(gameObject);
+            _ragdoll.SetRagdoll(true);
         }
     }
 }

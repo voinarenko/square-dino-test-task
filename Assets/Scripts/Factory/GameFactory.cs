@@ -116,6 +116,8 @@ namespace Factory
             health.ResetHealth();
             obj.TryGetComponent<EnemyDeath>(out var death);
             death.Construct(_progressService.Progress);
+            obj.TryGetComponent<EnemyRagdoll>(out var ragdoll);
+            ragdoll.SetRagdoll(false);
             obj.transform.LookAt(hero.position);
         }
 
